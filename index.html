@@ -431,6 +431,23 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;op
   .vcase .cvis.play{margin-inline:auto}
   .vcase .cvis.shot{margin-inline:auto}
 }
+
+.pcase{grid-template-columns:1fr;align-items:start}
+.pcase h3{font-family:var(--display);font-size:1.5rem;margin:6px 0 0;letter-spacing:-.02em;line-height:1.15}
+.pdesc{margin:0;color:var(--mute);max-width:46em}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.pep p{margin:10px 0 0;color:var(--mute);font-size:15px}
+.pv{position:relative;display:block;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#000;text-decoration:none}
+.pv img{width:100%;height:100%;object-fit:cover;display:block}
+.pv.wide{aspect-ratio:16/9}
+.pv.wide b{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;color:#fff;font:600 14px var(--body);background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.pv.short{aspect-ratio:9/16}
+.pv:hover .pbtn{transform:scale(1.1)}
+.pv:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.plabel{margin:0 0 10px;font:700 13px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.srow{display:grid;grid-template-columns:repeat(3,minmax(0,150px));gap:14px}
+.pv.short .pbtn{width:44px;height:44px;margin:-22px 0 0 -22px}.pv.short .pbtn svg{width:22px;height:22px}
+@media (max-width:760px){.srow{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@800&family=Noto+Sans+Gujarati:wght@800&family=Noto+Sans+Bengali:wght@800&family=Noto+Sans+Tamil:wght@800&family=Noto+Sans+Telugu:wght@800&family=Noto+Sans+Kannada:wght@800&family=Noto+Sans+Gurmukhi:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -525,6 +542,18 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')done(true)})
 
 <h2 id="cases">Case studies</h2>
 <div class="cases">
+  <article class="vcase pcase" id="podcast">
+    <div class="cbody">
+      <p class="kind">Podcast editing</p>
+      <h3>Full episodes and the Shorts cut from them</h3>
+      <p class="pdesc">Clean multicam and Zoom edits in English, with typography intros, tight pacing and Shorts for reach. I have edited set-format podcasts for about three years, in English, Hindi and Marathi.</p>
+    </div>
+    <div class="pgrid">
+      <div class="pep"><a class="pv wide" href="https://youtu.be/-IjLc8sG7Ic" target="_blank" rel="noopener" aria-label="Watch on YouTube: UPSCprep multicam episode"><img src="https://i.ytimg.com/vi/-IjLc8sG7Ic/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/-IjLc8sG7Ic/hqdefault.jpg'"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span><b>UPSCprep.com · English multicam</b></a><p>Multicam switching, audio clean-up and a typography intro.</p></div>
+      <div class="pep"><a class="pv wide" href="https://youtu.be/ABBYuet4U40" target="_blank" rel="noopener" aria-label="Watch on YouTube: English Zoom episode"><img src="https://i.ytimg.com/vi/ABBYuet4U40/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/ABBYuet4U40/hqdefault.jpg'"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span><b>English podcast · recorded on Zoom</b></a><p>A Zoom-recorded episode, cleaned up and paced to feel like a studio show.</p></div>
+    </div>
+    <div class="pshorts"><p class="plabel">Shorts cut from the Zoom episode</p><div class="srow"><a class="pv short" href="https://youtube.com/shorts/V4ro91IsRBk" target="_blank" rel="noopener" aria-label="Watch Short 1 on YouTube"><img src="https://i.ytimg.com/vi/V4ro91IsRBk/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span></a><a class="pv short" href="https://youtube.com/shorts/STFmQhuiyI8" target="_blank" rel="noopener" aria-label="Watch Short 2 on YouTube"><img src="https://i.ytimg.com/vi/STFmQhuiyI8/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span></a><a class="pv short" href="https://youtube.com/shorts/AfB5MIGAeWw" target="_blank" rel="noopener" aria-label="Watch Short 3 on YouTube"><img src="https://i.ytimg.com/vi/AfB5MIGAeWw/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span></a></div></div>
+  </article>
   <article class="vcase">
     <button type="button" class="cvis play" data-reel="greenmentor" aria-label="Play the Greenmentor reel"><img src="posters/greenmentor.jpg" alt="" loading="lazy" decoding="async"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span></button>
     <div class="cbody">
@@ -943,6 +972,12 @@ if(!reduce&&'IntersectionObserver' in window){
   Array.prototype.forEach.call(nums,function(b){co.observe(b)});
 }
 })();
+</script>
+<script>
+(function(){var t=document.querySelector('.vtile.wave'),c=document.getElementById('podcast');if(!t||!c)return;
+t.style.cursor='pointer';t.setAttribute('role','link');t.setAttribute('aria-label','Podcast editing: see the podcast case study');
+function go(){c.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})}
+t.addEventListener('click',go);t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});})();
 </script>
 </body>
 </html>
