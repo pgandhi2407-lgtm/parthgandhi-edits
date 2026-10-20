@@ -448,6 +448,23 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;op
 .srow{display:grid;grid-template-columns:repeat(3,minmax(0,150px));gap:14px}
 .pv.short .pbtn{width:44px;height:44px;margin:-22px 0 0 -22px}.pv.short .pbtn svg{width:22px;height:22px}
 @media (max-width:760px){.srow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.appicon{margin-top:62px}
+.tapcue{position:absolute;left:50%;top:-62px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;white-space:nowrap;pointer-events:none;z-index:2}
+.tapcue .pill{background:var(--accent);color:var(--on-accent);font:700 15px var(--body);padding:9px 16px;border-radius:999px;box-shadow:0 6px 20px rgba(124,144,255,.35)}
+.tapcue .arr{width:30px;height:16px;color:var(--accent);transform:rotate(-90deg);margin:4px 0;animation:nudgeV 1.6s ease-in-out infinite}
+@keyframes nudgeV{0%,100%{transform:rotate(-90deg) translateX(0)}50%{transform:rotate(-90deg) translateX(6px)}}
+/* feed hints */
+.fhint{display:none}
+.fcue{position:absolute;left:50%;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:8px;white-space:nowrap;background:rgba(14,18,24,.82);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:9px 16px;font:600 14px var(--body);opacity:0;pointer-events:none;transition:opacity .4s;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.fcue.show{opacity:1}
+.fcue svg{width:18px;height:18px;flex:none}
+#cue-sound{top:calc(max(12px,env(safe-area-inset-top)) + 58px);cursor:pointer;font-family:inherit}
+#cue-sound.show{pointer-events:auto}
+#cue-swipe{bottom:26%;flex-direction:column;gap:2px;padding:10px 18px}
+#cue-swipe svg{animation:swipeUp 1.4s ease-in-out infinite}
+@keyframes swipeUp{0%,100%{transform:translateY(3px);opacity:.5}50%{transform:translateY(-4px);opacity:1}}
+@media (prefers-reduced-motion:reduce){.tapcue .arr,#cue-swipe svg{animation:none!important}.fcue{transition:none}}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@800&family=Noto+Sans+Gujarati:wght@800&family=Noto+Sans+Bengali:wght@800&family=Noto+Sans+Tamil:wght@800&family=Noto+Sans+Telugu:wght@800&family=Noto+Sans+Kannada:wght@800&family=Noto+Sans+Gurmukhi:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -512,7 +529,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')done(true)})
 </header>
 
 <main>
-<section class="appwrap" id="work" aria-label="My Portfolio"><button type="button" class="appicon" id="open-feed" aria-haspopup="dialog" aria-controls="feed"><span class="glow" aria-hidden="true"></span><span class="tile" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 56 56" fill="none"><rect x="8" y="10" width="40" height="36" rx="7" stroke="#fff" stroke-width="3"/><path d="M8 20h40M20 10l-5 10M32 10l-5 10M44 10l-5 10" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M23 28v12l11-6z" fill="#fff"/></svg></span><span class="applabel">My Portfolio</span></button><p class="apphint">Tap to open the reels</p></section>
+<section class="appwrap" id="work" aria-label="My Portfolio"><button type="button" class="appicon" id="open-feed" aria-haspopup="dialog" aria-controls="feed"><span class="glow" aria-hidden="true"></span><span class="tapcue" aria-hidden="true"><span class="pill">Tap to watch my reels</span><svg class="arr" viewBox="0 0 30 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M29 8H3M9 2 3 8l6 6"/></svg></span><span class="tile" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 56 56" fill="none"><rect x="8" y="10" width="40" height="36" rx="7" stroke="#fff" stroke-width="3"/><path d="M8 20h40M20 10l-5 10M32 10l-5 10M44 10l-5 10" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M23 28v12l11-6z" fill="#fff"/></svg></span><span class="applabel">My Portfolio</span></button><p class="apphint">Tap to open the reels</p></section>
 
 <div class="ticker" aria-hidden="true"><div class="tk"><span>Reels</span><span>Motion typography</span><span>Captions</span><span>Sound design</span><span>Animation</span><span>Storytelling</span><span>Podcasts</span><span>Documentary</span><span>Reels</span><span>Motion typography</span><span>Captions</span><span>Sound design</span><span>Animation</span><span>Storytelling</span><span>Podcasts</span><span>Documentary</span></div></div>
 
@@ -715,7 +732,9 @@ setTimeout(function(){setInterval(next,2800)},2200);
           <button type="button" class="ibtn" id="f-close" aria-label="Close portfolio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button>
         </div>
       </div>
-      <div class="fhint" id="fhint">Swipe up for the next reel. Tap the speaker for sound.</div>
+      <div class="fhint" id="fhint"></div>
+      <button type="button" class="fcue" id="cue-sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Tap to unmute</button>
+      <div class="fcue" id="cue-swipe" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span id="cue-swipe-t">Swipe up for next</span></div>
       <div class="scroller" id="fscroll"></div>
       <div class="sheetscrim" id="fscrim"></div>
       <div class="sheet" id="fsheet" role="dialog" aria-modal="true" aria-labelledby="fs-title">
@@ -780,7 +799,7 @@ var POSTS=[
 var built=false,cur=-1,muted=true,posts=[],vids=[],metas=[],bars=[],io=null,lastFocus=null,sheetOpener=null,hintTimer=null,hintShown=false,pushed=false;
 
 function setMuted(m){
-  muted=m;
+  muted=m;if(!m&&cueS)hideCue(cueS);
   var v=vids[cur];if(v)v.muted=m;
   muteBtn.setAttribute('data-muted',m?'true':'false');
   muteBtn.setAttribute('aria-label',m?'Turn sound on':'Turn sound off');
@@ -801,6 +820,7 @@ function play(i){
 function setActive(i){
   if(i===cur||i<0||i>=POSTS.length)return;
   if(cur>-1&&vids[cur])vids[cur].pause();
+  if(cur>-1&&cueW)hideCue(cueW);
   cur=i;
   fcount.textContent=(i+1)+' / '+POSTS.length;
   metas.forEach(function(m,j){m.tabIndex=(j===i)?0:-1});
@@ -878,10 +898,19 @@ function closeSheet(noFocus){
   sheetOpener=null;
 }
 
+var cueS=document.getElementById('cue-sound'),cueW=document.getElementById('cue-swipe'),cueT1=null,cueT2=null,swiped=false;
+function hideCue(el){el.classList.remove('show')}
 function showHint(){
-  hint.classList.add('show');clearTimeout(hintTimer);
-  hintTimer=setTimeout(function(){hint.classList.remove('show')},4500);
+  swiped=false;
+  var touch=window.matchMedia&&window.matchMedia('(hover: none)').matches;
+  document.getElementById('cue-swipe-t').textContent=touch?'Swipe up for next':'Scroll for next';
+  if(muted)cueS.classList.add('show');
+  cueW.classList.add('show');
+  clearTimeout(cueT1);clearTimeout(cueT2);
+  cueT1=setTimeout(function(){hideCue(cueS)},9000);
+  cueT2=setTimeout(function(){hideCue(cueW)},6000);
 }
+cueS.addEventListener('click',function(e){e.stopPropagation();setMuted(false);hideCue(cueS)});
 function openFeed(idx){
   var start=(typeof idx==='number')?idx:0;
   if(!built)build();
@@ -894,7 +923,7 @@ function openFeed(idx){
 }
 function closeFeed(){
   if(feed.hidden)return;
-  closeSheet(true);
+  closeSheet(true);hideCue(cueS);hideCue(cueW);
   vids.forEach(function(v){v.pause()});
   feed.classList.remove('open');feed.hidden=true;document.body.style.overflow='';
   cur=-1;
